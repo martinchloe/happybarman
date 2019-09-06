@@ -18,14 +18,12 @@ export default function Authentification(props){
         setPassword(event.currentTarget.value);
     }
 
-    const handleConnexion = event =>{
+    const handleConnexion = event => {
         event.preventDefault();
         processLogin();
     }
     
-    
-    
-    const processLogin = (callback)=>{
+    const processLogin = (callback) => {
         axios
         .post('http://localhost:8080/auth/local', {
             identifier: identifier,
@@ -36,8 +34,9 @@ export default function Authentification(props){
             // console.log('Well done!');
             // console.log('User profile', response.data.user);
             // console.log('User token', response.data.jwt);
-            
-                props.setUser({identifier: identifier, password: password, jwt: response.data.jwt, isLogged:true});  
+
+                props.setUser({identifier: identifier, password: password, jwt: response.data.jwt, isLogged: true, role: response.data.user.role.id});
+                console.log(response.data.jwt)  
             })
             .catch(error => {
                 // Handle error.
